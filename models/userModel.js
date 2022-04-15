@@ -28,6 +28,7 @@ const UserSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "Please provide a password"],
 		minlength: 6,
+		select: false,
 	},
 	location: {
 		type: String,
@@ -38,15 +39,21 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", async function () {
+	if (!this.isModified("password")) return;
 	const salt = await bcrypt.genSalt(10);
 	this.password = await bcrypt.hash(this.password, salt);
 });
 
-UserSchema.methods.createJWT = async function () {
+UserSchema.methods.createJWT = function () {
 	const token = jwt.sign({ userId: this._id }, process.env.JWT_SECRET, {
 		expiresIn: process.env.JWT_LIFETIME,
 	});
 	return token;
+};
+
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+	const isMatch = await bcrypt.compare(candidatePassword, this.password);
+	return isMatch;
 };
 
 export default mongoose.model("User", UserSchema);

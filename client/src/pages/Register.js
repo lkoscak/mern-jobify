@@ -13,7 +13,7 @@ const initialState = {
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
-	const { isLoading, showAlert, displayAlert, registerUser, user } =
+	const { isLoading, showAlert, displayAlert, registerUser, loginUser, user } =
 		useAppContext();
 	const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ const Register = () => {
 		if (user) {
 			setTimeout(() => {
 				navigate("/");
-			}, 3000);
+			}, 1000);
 		}
 	}, [user, navigate]);
 
@@ -43,6 +43,8 @@ const Register = () => {
 		const user = { name, email, password };
 		if (!isMember) {
 			registerUser(user);
+		} else {
+			loginUser(user);
 		}
 	};
 
@@ -51,6 +53,7 @@ const Register = () => {
 			<form className="form" onSubmit={onSubmit}>
 				<Logo />
 				<h3>{values.isMember ? "Login" : "Register"}</h3>
+				{showAlert && <Alert></Alert>}
 
 				{!values.isMember && (
 					<FormRow
@@ -72,7 +75,6 @@ const Register = () => {
 					value={values.password}
 					handleChange={handleChange}
 				></FormRow>
-				{showAlert && <Alert></Alert>}
 				<button type="submit" className="btn btn-block" disabled={isLoading}>
 					submit
 				</button>
