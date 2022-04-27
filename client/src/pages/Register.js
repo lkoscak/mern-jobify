@@ -4,6 +4,9 @@ import { Logo, FormRow, Alert } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import useAppContext from "../hooks/useAppContext";
 
+import { alertActions } from "../store/alert-slice";
+import { useSelector, useDispatch } from "react-redux";
+
 const initialState = {
 	name: "",
 	email: "",
@@ -13,8 +16,9 @@ const initialState = {
 
 const Register = () => {
 	const [values, setValues] = useState(initialState);
-	const { isLoading, showAlert, displayAlert, registerUser, loginUser, user } =
-		useAppContext();
+	const { showAlert } = useSelector((state) => state.alert);
+	const dispatch = useDispatch();
+	const { isLoading, registerUser, loginUser, user } = useAppContext();
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -37,7 +41,7 @@ const Register = () => {
 		e.preventDefault();
 		const { name, email, password, isMember } = values;
 		if (!email || !password || (!isMember && !name)) {
-			displayAlert();
+			dispatch(alertActions.displayAlert());
 			return;
 		}
 		const user = { name, email, password };

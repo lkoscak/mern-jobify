@@ -5,11 +5,16 @@ import "./index.css";
 import App from "./App";
 import { AppProvider } from "./context/appContext";
 
+import { Provider } from "react-redux";
+import store from "./store/index";
+
 ReactDOM.render(
 	<React.StrictMode>
-		<AppProvider>
-			<App />
-		</AppProvider>
+		<Provider store={store}>
+			<AppProvider>
+				<App />
+			</AppProvider>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

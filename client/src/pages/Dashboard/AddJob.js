@@ -6,6 +6,7 @@ const AddJob = () => {
 		isLoading,
 		isEditing,
 		showAlert,
+		displayAlert,
 		position,
 		company,
 		jobLocation,
@@ -23,7 +24,7 @@ const AddJob = () => {
 		e.preventDefault();
 
 		if (!position || !company || !jobLocation) {
-			showAlert();
+			displayAlert();
 			return;
 		}
 
