@@ -6,6 +6,8 @@ Full stack project built with React and Node based on Udemy course by John Smilg
 
 Project in Action - [Jobify](https://jobify-6991.herokuapp.com/landing)
 
+!(https://prnt.sc/rtadbA3doZPO)
+
 #### Run The App Locally
 
 ```sh
