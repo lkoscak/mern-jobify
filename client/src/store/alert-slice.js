@@ -6,16 +6,16 @@ const alertSlice = createSlice({
 	name: "alert",
 	initialState,
 	reducers: {
-		displayAlert(state, action) {
+		displayAlert(_state, action) {
 			return {
 				showAlert: true,
 				alertType: action?.payload?.alertType || "danger",
 				alertText: action?.payload?.alertText || "Please provide all values!",
 			};
 		},
-		clearAlert(state) {
+		clearAlert() {
 			return {
-				showAlert: true,
+				showAlert: false,
 				alertType: "",
 				alertText: "",
 			};
@@ -25,5 +25,15 @@ const alertSlice = createSlice({
 
 const alertActions = alertSlice.actions;
 
+const displayAlert = (alertData) => {
+	return (dispatch, getState) => {
+		dispatch(alertActions.displayAlert(alertData));
+		setTimeout(() => {
+			console.log(getState());
+			dispatch(alertActions.clearAlert());
+		}, 3000);
+	};
+};
+
 export default alertSlice;
-export { alertActions };
+export { alertActions, displayAlert };

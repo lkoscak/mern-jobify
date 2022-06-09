@@ -4,7 +4,7 @@ import { Logo, FormRow, Alert } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import useAppContext from "../hooks/useAppContext";
 
-import { alertActions } from "../store/alert-slice";
+import { displayAlert } from "../store/alert-slice";
 import { useSelector, useDispatch } from "react-redux";
 
 const initialState = {
@@ -41,7 +41,7 @@ const Register = () => {
 		e.preventDefault();
 		const { name, email, password, isMember } = values;
 		if (!email || !password || (!isMember && !name)) {
-			dispatch(alertActions.displayAlert());
+			dispatch(displayAlert());
 			return;
 		}
 		const user = { name, email, password };
