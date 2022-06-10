@@ -2,7 +2,7 @@
 
 #### Track Your Job Search
 
-Full stack project built with React and Node based on Udemy course by John Smilga (https://www.udemy.com/course/mern-stack-course-mongodb-express-react-and-nodejs/)
+> Full stack project built with React and Node based on Udemy course by John Smilga (https://www.udemy.com/course/mern-stack-course-mongodb-express-react-and-nodejs/)
 
 ## Project in Action - [Jobify](https://jobify-6991.herokuapp.com/landing)
 
